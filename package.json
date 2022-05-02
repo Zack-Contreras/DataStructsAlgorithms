@@ -1,0 +1,12 @@
+{
+  "name": "AlgorithmsAndDataStructures",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "array": "node ./arrays.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}

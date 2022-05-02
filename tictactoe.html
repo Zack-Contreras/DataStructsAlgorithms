@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        html {
+            background: black;
+        }
+
+        .board {
+            display: flex;
+            flex-wrap: wrap;
+            width: 600px;
+            height: 600px;
+            border: 1px solid white;
+        }
+        .board__block {
+            color: wheat;
+            box-sizing: border-box;
+            border: 1px solid white;
+            max-height: 200px;
+            min-width: 200px;
+        }
+    </style>
+</head>
+<body>
+    <section class="board">
+
+    </section>
+    <script>
+        (function() {
+            function renderGame() {
+                game.forEach((block,i) => {
+                    const b = document.createElement('div')
+                    b.classList.add("board__block")
+                    b.dataset.index = i
+                    b.textContent = game[i]
+                    b.addEventListener("click", e => {
+                        let el = e.target
+                        game[i] = turnX ? "X" : "O"
+                        el.textContent = game[i]
+                        if(checkWin((turnX ? "X" : "O"))) {
+                            alert("WON")
+                            gameBoard.innerHTML = ""
+                            game = new Array(9).fill(null)
+                            renderGame()
+                            return
+                        }
+                        turnX = !turnX
+                    })
+                    //add to game board
+                    gameBoard.appendChild(b)
+                })
+            }
+            function checkWin(turn) {
+                const wins = [[0,1,2], [3,4,5], [6,7,8]]
+                const test = wins.some(condition => {
+                    return condition.every(index => {
+                        return game[index] === turn 
+                    })
+                })
+                return test
+            }
+
+            const gameBoard = document.querySelector(".board")
+            let game = [null, null, null, null, null, null, null, null, null]
+            let turnX = true;
+            renderGame()
+        })();
+    </script>
+</body>
+</html>
